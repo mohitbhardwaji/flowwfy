@@ -5,6 +5,7 @@ import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
 import { signupUser } from "../api/auth/auth"; // Import API function
 import Loader from "../components/Loader"; // Import Loader component
+import { ErrorToast, SuccessToast } from "../components/common/SweetToast";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -25,14 +26,14 @@ const Signup = () => {
 
     try {
       await signupUser(formData.email, formData.password);
-      setSuccess("Account created successfully! Redirecting to login...");
+      SuccessToast("Account created successfully! Redirecting to login...");
       
       // Redirect to login after a short delay
       setTimeout(() => {
         navigate("/");
       }, 2000);
     } catch (err) {
-      setError(err.message || "Signup failed! Please try again.");
+      ErrorToast(err.message || "Signup failed! Please try again.");
     } finally {
       setLoading(false);
     }

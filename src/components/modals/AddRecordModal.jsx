@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { addData, uploadExcel } from "../../api/data/data";
+import { ErrorToast, SuccessToast } from "../common/SweetToast";
 
 const AddRecordModal = ({ isOpen, onClose, onSave, modalMessage }) => {
   const [formData, setFormData] = useState({
@@ -21,12 +22,13 @@ const AddRecordModal = ({ isOpen, onClose, onSave, modalMessage }) => {
     try {
       const response = await addData(formData);
       console.log({ response });
+      SuccessToast("Record updated successfully!");
       onSave(response); // Pass saved data to parent component
       setFormData({ code: "", code_description: "" }); // Reset form
       onClose(); // Close the modal after saving
     } catch (error) {
-      console.error("Failed to add data:", error);
-      setErrorMessage(error?.response?.data?.message || "Failed to add data."); // Show error message
+      ErrorToast(error?.response?.data?.message || "Failed to add record!");
+      // setErrorMessage(error?.response?.data?.message || "Failed to add data."); // Show error message
     } finally {
       setLoading(false);
     }

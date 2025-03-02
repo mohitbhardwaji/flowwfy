@@ -7,6 +7,7 @@ import Lottie from "lottie-react";
 import { loginUser } from "../api/auth/auth"; // Import API function
 import Loader from "../components/Loader"; // Import Loader component
 import { Link } from "react-router-dom";
+import { ErrorToast, SuccessToast } from "../components/common/SweetToast";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -27,13 +28,15 @@ const Login = () => {
         try {
             const response = await loginUser(formData.email, formData.password);
             if (response.access_token) {
+                SuccessToast("Succesfully LoggedIn")
                 dispatch(login(response));
                  navigate("/dashboard");
             } else {
-                setError("Invalid credentials. Please try again.");
+                ErrorToast("Invalid credentials. Please try again.")
             }
         } catch (err) {
-            setError("Something went wrong. Please try again.");
+            console.log()
+            ErrorToast(err || "Something went wrong. Please try again.");
         } finally {
             setLoading(false);
         }

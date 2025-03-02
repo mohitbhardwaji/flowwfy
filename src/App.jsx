@@ -5,12 +5,14 @@ import AppRoutes from "./routes/AppRoutes";
 import Loader from "./components/Loader";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
     <div className="App">
       <Provider store={store}>
-      <AppRoutes />
+        <Toaster position="top-right" reverseOrder={false} />
+        <AppRoutes />
       </Provider>
     </div>
   );

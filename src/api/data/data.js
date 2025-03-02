@@ -2,11 +2,11 @@ import axios from "axios";
 
 const BASE_URL = "https://react-flow-nndy.onrender.com";
 
-export const fetchData = async () => {
+export const fetchData = async (page) => {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await axios.get(`${BASE_URL}/data/get_data`, {
+    const response = await axios.get(`${BASE_URL}/data/get_data?page=${page}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -36,6 +36,24 @@ export const addData = async (data) => {
     throw error;
   }
 };
+
+export const updateData = async (id,data) =>{
+  try {
+    const token = localStorage.getItem("token");
+    console.log(data,id)
+    const response = await axios.patch(`${BASE_URL}/data/update/${id}`, data,{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error("Error adding data:", error);
+    throw error;
+  }
+}
 
 export const uploadExcel = async (file) => {
   try {
