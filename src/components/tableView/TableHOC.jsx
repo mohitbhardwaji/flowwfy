@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Eye, Edit, ToggleRight } from "lucide-react";
-import Pagination from "../common/Pagination";
 
 const TableHOC = ({ columns, data, onEdit }) => {
-
   return (
-    <div className="">
-      <table className="w-full text-left border-collapse bg-white shadow-md rounded-lg overflow-hidden">
-        <thead>
-          <tr className="bg-[#e2eafc] text-gray-700">
+    <div className="relative max-h-[500px] overflow-y-auto border border-gray-300 rounded-lg shadow-md">
+      <table className="w-full text-left border-collapse bg-white">
+        {/* Sticky Header */}
+        <thead className="sticky top-0 bg-[#e2eafc] text-gray-700 z-10">
+          <tr>
             {columns.map((col) => (
               <th key={col.key} className="px-4 py-3 border-b-2 border-gray-300">
                 {col.label}
@@ -16,6 +15,8 @@ const TableHOC = ({ columns, data, onEdit }) => {
             ))}
           </tr>
         </thead>
+
+        {/* Table Body */}
         <tbody>
           {data.map((row, index) => (
             <tr
@@ -27,17 +28,17 @@ const TableHOC = ({ columns, data, onEdit }) => {
               {columns.map((col) => (
                 <td key={col.key} className="px-4 py-3">
                   {col.key === "actions" ? (
-                    <div className="flex items-center space-x-3 ">
-                      <button className="p-2 bg-[#7363D6] rounded-full ">
+                    <div className="flex items-center space-x-3">
+                      <button className="p-2 bg-[#7363D6] rounded-full">
                         <Eye className="w-5 h-5 text-white" />
                       </button>
                       <button
                         onClick={() => onEdit(row)}
-                        className="p-2 bg-[#7363D6] rounded-full "
+                        className="p-2 bg-[#7363D6] rounded-full"
                       >
                         <Edit className="w-5 h-5 text-white" />
                       </button>
-                      <button className="p-2 bg-[#7363D6] rounded-full  ">
+                      <button className="p-2 bg-[#7363D6] rounded-full">
                         <ToggleRight className="w-5 h-5 text-white" />
                       </button>
                     </div>
@@ -50,9 +51,6 @@ const TableHOC = ({ columns, data, onEdit }) => {
           ))}
         </tbody>
       </table>
-
-      {/* Pagination - Positioned at Bottom-Right */}
-     
     </div>
   );
 };
