@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:3000/auth";
+const API_BASE_URL = "https://react-flow-nndy.onrender.com/auth";
 
 // Login API
 export const loginUser = async (email, password) => {

@@ -19,7 +19,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`h-screen bg-[#7363D6] shadow-md fixed left-0 top-0 ${collapsed ? "w-20" : "w-64"} transition-all duration-300 flex flex-col`}>
+    <div className={`h-screen bg-[#7363D6] shadow-md z-50 fixed left-0 top-0 ${collapsed ? "w-20" : "w-64"} transition-all duration-300 flex flex-col`}>
       {/* Sidebar Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-300">
         <span className={`text-lg font-semibold text-white ${collapsed ? "hidden" : "block"}`}>
